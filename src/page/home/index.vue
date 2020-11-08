@@ -46,7 +46,9 @@
         </div>
       </div>
       <div class="news_right">
-        <div class="news-photo"></div>
+        <div class="news-photo_outside">
+          <img class="news-photo" v-bind:src="item.photo">
+        </div>
       </div>
     </div>
   </div>
@@ -64,14 +66,22 @@ export default {
           sticky_content: "置顶",
           writer: "新华网客户端",
           number_of_comments: "1378",
-          release_time: "1"
+          release_time: "2"
         },
         {
-          news_title: "习近平对川藏铁路开工建设作出重要指示强调 发扬“两路”精神和青藏铁路精神 高质量推进工程建设 李克强作出批示",
+          news_title: "焦点访谈：“十四五”时期，中国将着重办好哪些事？",
           sticky_content: "置顶",
-          writer: "新华网客户端",
-          number_of_comments: "1378",
-          release_time: "1"
+          writer: "央视网新闻",
+          number_of_comments: "608",
+          release_time: "2"
+        },
+        {
+          news_title: "7首歌，一起走过71年",
+          sticky_content: "置顶",
+          writer: "人民网",
+          number_of_comments: "400",
+          release_time: "2",
+          photo: "http://p1-tt-ipv6.byteimg.com/img/tos-cn-i-0004/14a069d7bc264501b7c8ff2157b6633a~tplv-tt-cs0:640:360.jpg"
         },
       ]
 
@@ -225,8 +235,10 @@ export default {
 }
 .news {
   border: 1px solid #000;
+  display: flex;
   .news_left {
     border: 1px solid #000;
+    flex: 1;
     .news_title {
       font-size: 19px;
       border: 1px solid #000;
@@ -234,18 +246,32 @@ export default {
     .news_information {
       font-size: 19px;
       border: 1px solid #000;
+      display: -ms-flexbox;
       display: flex;
-      align-items: center;
+      -ms-flex-align: center;
+      height: 28px;
+      border-bottom: 1px solid #F8F8F8;
       span {
         padding: 1px 1.5px;
         font-size: 12px;
         border: 1px solid  rgba(248, 89, 89, 0.5);
         color: #f85959;
+        height: 20px;
       }
       div {
         padding: 1px 1.5px;
         font-size: 12px;
         border: 1px solid #000;
+        height: 20px;
+      }
+    }
+  }
+  .news_right {
+    max-width: 14vh;
+    .news-photo_outside {
+    width: 100%;
+      .news-photo {
+        width: 100%;
       }
     }
   }
