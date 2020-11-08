@@ -13,7 +13,26 @@
         <div class="search"></div>
       </div>
     </div>
-    <div class="bottom"></div>
+    <div class="bottom">
+      <div class="option_outside">
+        <a class="recommended_option"></a>
+        <a class="option"></a>
+        <a class="option"></a>
+        <a class="option"></a>
+        <a class="option"></a>
+        <a class="option"></a>
+        <a class="option"></a>
+        <a class="option"></a>
+        <a class="option"></a>
+        <a class="option"></a>
+        <a class="option"></a>
+        <a class="option"></a>
+      </div>
+      <a class="plus_sign">
+        <div class="horizontal_line"></div>
+        <div class="vertical_line"></div>
+      </a>
+    </div>
   </div>
   <div class="content">
     <div class="news" v-for="(item,index) of news_content" :key="item.id">{{item}}/{{index}}
@@ -68,11 +87,6 @@ export default {
   display: flex;
   background: #d43d3d;
 }
-.header .bottom {
-  width: 100%;
-  height: 40px;
-  border: 1px solid #000;
-}
 .header .top .left {
   width: 88px;
   height: 42px;
@@ -111,14 +125,67 @@ export default {
   justify-content: center;
   align-items: center;
 }
-.header .top .middle .icon {    
-  width: 131px;
+.header .top .middle .icon {   
+  width: 109px;
   height: 34px;
   border: 1px solid #000;
+  background: url(//s3b.pstatp.com/growth/mobile_list/image/wap_logo@3x_581de69e.png) no-repeat right center;
+  background-size: 83px;
 }
 .header .top .middle .refresh {    
-  width: 26px;
+  width: 22px;
   height: 34px;
   border: 1px solid #000;
+  background: url(//s3a.pstatp.com/growth/mobile_list/image/titlebar_refresh_small@3x_96fb31e4.png) no-repeat center center;
+  background-size: 15px;
+}
+.header .bottom {
+  display: flex;
+  width: 100%;
+  height: 40px;
+  border: 1px solid #000;
+  overflow: hidden;
+}
+.header .bottom .plus_sign {
+  width: 38px;
+  height: 38px;
+  border: 1px solid #000;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.header .bottom .plus_sign .horizontal_line {    
+  width: 16px;
+  border: 1px solid #000;
+}
+.header .bottom .plus_sign .vertical_line {
+  position: absolute;
+  height: 16px;
+  border: 1px solid #000;
+}
+.header .bottom .option_outside {
+  width: 100%;
+  height: 51px;
+  border: 1px solid #000;
+  overflow: hidden;
+  overflow-x: scroll;
+  white-space: nowrap;
+  position: relative;
+  bottom: 2px;
+}
+.header .bottom .recommended_option {
+  display: inline-block;
+  width: 64px;
+  height: 38px;
+  border: 1px solid #000;    
+  margin: 0px -4px;
+}
+.header .bottom .option {
+  display: inline-block;
+  width: 64px;
+  height: 38px;
+  border: 1px solid #000;    
+  margin: 0px -4px;
 }
 </style>
