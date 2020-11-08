@@ -15,18 +15,18 @@
     </div>
     <div class="bottom">
       <div class="option_outside">
-        <a class="recommended_option"></a>
-        <a class="option"></a>
-        <a class="option"></a>
-        <a class="option"></a>
-        <a class="option"></a>
-        <a class="option"></a>
-        <a class="option"></a>
-        <a class="option"></a>
-        <a class="option"></a>
-        <a class="option"></a>
-        <a class="option"></a>
-        <a class="option"></a>
+        <a class="recommended_option">推荐</a>
+        <a class="option">视频</a>
+        <a class="option">热点</a>
+        <a class="option">社会</a>
+        <a class="option">娱乐</a>
+        <a class="option">军事</a>
+        <a class="option">科技</a>
+        <a class="option">汽车</a>
+        <a class="option">房产</a>
+        <a class="option">家居</a>
+        <a class="option">体育</a>
+        <a class="option">财经</a>
       </div>
       <a class="plus_sign">
         <div class="horizontal_line"></div>
@@ -35,12 +35,19 @@
     </div>
   </div>
   <div class="content">
-    <div class="news" v-for="(item,index) of news_content" :key="item.id">{{item}}/{{index}}
+    <div class="news" v-for="(item, index) of news_content" :key="index">
       <div class="news_left">
-        <div class="news_title"></div>
-        <div class="news_writer"></div>
+        <div class="news_title">{{item.news_title}}</div>
+        <div class="news_information">
+          <span class="news-sticky_content">{{item.sticky_content}}</span>
+          <div class="news-writer">{{item.writer}}</div>
+          <div class="news-number_of_comments">评论 {{item.number_of_comments}}</div>
+          <div class="news-release_time">{{item.release_time}}小时前</div>
+        </div>
       </div>
-      <div class="news_right"></div>
+      <div class="news_right">
+        <div class="news-photo"></div>
+      </div>
     </div>
   </div>
 </div>
@@ -52,9 +59,21 @@ export default {
   data() {
     return {
       news_content: [
-        {},
-        123, 456111, 111, 45
-        ]
+        {
+          news_title: "习近平对川藏铁路开工建设作出重要指示强调 发扬“两路”精神和青藏铁路精神 高质量推进工程建设 李克强作出批示",
+          sticky_content: "置顶",
+          writer: "新华网客户端",
+          number_of_comments: "1378",
+          release_time: "1"
+        },
+        {
+          news_title: "习近平对川藏铁路开工建设作出重要指示强调 发扬“两路”精神和青藏铁路精神 高质量推进工程建设 李克强作出批示",
+          sticky_content: "置顶",
+          writer: "新华网客户端",
+          number_of_comments: "1378",
+          release_time: "1"
+        },
+      ]
 
     }
   },
@@ -145,6 +164,7 @@ export default {
   height: 40px;
   border: 1px solid #000;
   overflow: hidden;
+  background: #f4f5f6;
 }
 .header .bottom .plus_sign {
   width: 38px;
@@ -157,12 +177,16 @@ export default {
 }
 .header .bottom .plus_sign .horizontal_line {    
   width: 16px;
-  border: 1px solid #000;
+  height: 2px;
+  // border: 1px solid #f85959;
+  background: #f85959;
 }
 .header .bottom .plus_sign .vertical_line {
   position: absolute;
+  width: 2px;
   height: 16px;
-  border: 1px solid #000;
+  // border: 1px solid #f85959;
+  background: #f85959;
 }
 .header .bottom .option_outside {
   width: 100%;
@@ -178,14 +202,52 @@ export default {
   display: inline-block;
   width: 64px;
   height: 38px;
-  border: 1px solid #000;    
+  border: 1px solid #000;
   margin: 0px -4px;
+  text-align: center;
+  line-height: 38px;
+  font-size: 18px;
+  color: #000;
 }
 .header .bottom .option {
   display: inline-block;
   width: 64px;
   height: 38px;
-  border: 1px solid #000;    
+  border: 1px solid #000;
   margin: 0px -4px;
+  text-align: center;
+  line-height: 38px;
+  font-size: 18px;
+  color: #000;
+}
+.content {
+  padding: 15px 16px;
+}
+.news {
+  border: 1px solid #000;
+  .news_left {
+    border: 1px solid #000;
+    .news_title {
+      font-size: 19px;
+      border: 1px solid #000;
+    }
+    .news_information {
+      font-size: 19px;
+      border: 1px solid #000;
+      display: flex;
+      align-items: center;
+      span {
+        padding: 1px 1.5px;
+        font-size: 12px;
+        border: 1px solid  rgba(248, 89, 89, 0.5);
+        color: #f85959;
+      }
+      div {
+        padding: 1px 1.5px;
+        font-size: 12px;
+        border: 1px solid #000;
+      }
+    }
+  }
 }
 </style>
