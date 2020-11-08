@@ -318,6 +318,7 @@ export default {
         .news_title {
           font-size: 17px;
           color: #000;
+          font-weight: 400;
         }
         .news_information {
           display: -ms-flexbox;
@@ -374,6 +375,7 @@ export default {
     .bottom {
       font-size: 17px;
       color: #000;
+      font-weight: 400;
       display: flex;
       height: 28px;
       border-bottom: 1px solid #F8F8F8;
@@ -397,6 +399,7 @@ export default {
       .ad_title {
         font-size: 17px;
         color: #000;
+        font-weight: 400;
       }
     }
     .middle {
@@ -407,6 +410,7 @@ export default {
     .bottom {
       font-size: 17px;
       color: #000;
+      font-weight: 400;
       display: flex;
       height: 28px;
       border-bottom: 1px solid #F8F8F8;
