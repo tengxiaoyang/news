@@ -3,14 +3,15 @@
   <div class="header">
     <div class="top">
       <div class="left">
-        <div class="message"></div>
+        <div class="message" @click="get_message_window()">
+        </div>
       </div>
       <div class="middle">
         <div class="icon"></div>
         <div class="refresh"></div>
       </div>
       <div class="right">
-        <div class="search"></div>
+        <div class="search" @click="route_to('search')"></div>
       </div>
     </div>
     <div class="bottom">
@@ -81,6 +82,30 @@
       </div>
     </div>
   </div>
+  <div class="bottom_banner">
+    <div class="left"></div>
+    <div class="middle">今日头条</div>
+    <div class="right">打开</div>
+  </div>
+  <div class="message_window_outside" v-if="show_message_window">
+    <div class="message_window">
+      <div class="top">
+        <div class="left"></div>
+        <div class="middle">
+          <div class="middle_inside">
+            <div class="photo"></div>
+            <span class="title">已加载好您感兴趣的头条</span>
+          </div>
+        </div>
+        <div class="right">
+          <div class="cross" @click="get_message_window()"></div>
+        </div>
+      </div>
+      <div class="bottom">
+        <div class="button">立即打开</div>
+      </div>
+    </div>
+  </div>
 </div>
 </template>
 
@@ -89,6 +114,7 @@ export default {
   name: 'home',
   data() {
     return {
+      show_message_window: false,
       news_content: [
         {
           show_news_normal: true,
@@ -185,6 +211,12 @@ export default {
       console.log(r);
       this.$store.commit('ADD_NUM', r)
     },
+    get_message_window() {
+      this.show_message_window = !this.show_message_window
+    },
+    route_to (e) {
+      this.$router.push({path: e})
+    }
 
   }
 }
@@ -336,6 +368,8 @@ export default {
             padding: 1px 2.5px;
             font-size: 12px;
             height: 17px;
+            font-weight: 400;
+            color: #999;
           }
         }
       }
@@ -418,8 +452,8 @@ export default {
       .ad_text {
         padding: 1px 3.5px;
         font-size: 12px;
-        border: 1px solid rgba(248, 89, 89, 0.5);
-        color: #f85959;
+        border: 1px solid rgba(42, 144, 215, 0.5);
+        color: #2a90d7;
         height: 17px;
       }
       div {
@@ -429,6 +463,115 @@ export default {
       }
     }
   }
-
 }
+.bottom_banner {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  background: #fff;
+  .left {
+    width: 41px;
+    height: 38px;
+    background: url(https://s3.bytecdn.cn/growth/fe_sdk/image/banner_toutiao_icon_bce0b302.png);
+    background-size: 100%;
+      margin: 0 8px 0 12px;
+  }
+  .middle {
+    flex: 1;
+    height: 20px;
+    font-size: 15px;
+    font-weight: 400;
+  }
+  .right {
+    width: 64px;
+    height: 24px;
+    background: #ff5050;
+    border-radius: 20px;
+    margin: 0 12px 0 0;
+    font-size: 14px;
+    color: #fff;
+    text-align: center;
+    line-height: 24px;
+  }
+}
+.message_window_outside {
+  display: flex;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0,0,0,.5);
+  z-index: 1;
+}
+.message_window {
+  position: relative;
+  width: 75%;
+  background: #fff;
+  border-radius: 8px;
+  padding: 0 0 7px 0;
+  .top {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 177px;
+    .left,.right {
+      width: 33px;
+      height: 176px;
+      .cross {
+        width: 33px;
+        height: 27px;
+        background: url(https://s3.pstatp.com/growth/mobile_list/image/popup_banner_close_e6f62910.png) no-repeat center;
+        background-size: 53%;
+      }
+    }
+    .middle {
+      height: 160px;
+      width: 212px;
+      display: flex;
+      justify-content: center;
+      .middle_inside {
+        height: 158px;
+        width: 164px;
+        .photo {
+          width: 162px;
+          height: 122px;
+          background: url(https://s3a.pstatp.com/growth/mobile_list/image/popup_banner_6006ac97.png);
+          background-size: 100%;
+        }
+        .title {
+          position: absolute;
+          left: 36px;
+          display: block;
+          height: 36px;
+          width: 75%;
+          font-size: 17px;
+          text-align: center;
+          line-height: 36px;
+          color: #A5A5A5;
+        }
+      }
+    }
+  }
+  .bottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 44px;
+    .button {
+      width: 82%;
+      height: 96%;
+      text-align: center;
+      line-height: 200%;
+      font-size: 21px;
+      color: #fff;
+      background: #ff6762;
+    }
+  }
+}
+
 </style>
