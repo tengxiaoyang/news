@@ -29,7 +29,7 @@
         <a class="option">体育</a>
         <a class="option">财经</a>
       </div>
-      <a class="plus_sign">
+      <a class="plus_sign"  @click="route_to('more')">
         <div class="horizontal_line"></div>
         <div class="vertical_line"></div>
       </a>
@@ -85,7 +85,7 @@
   <div class="bottom_banner">
     <div class="left"></div>
     <div class="middle">今日头条</div>
-    <div class="right">打开</div>
+    <div class="right" @click="route_to('download')">打开</div>
   </div>
   <div class="message_window_outside" v-if="show_message_window">
     <div class="message_window">

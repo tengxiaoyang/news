@@ -1,16 +1,13 @@
 <template>
-  <div class="main">
-    <div class="top">
-      <div class="empty_area"></div>
-    </div>
-    <div class="middle"></div>
-    <div class="bottom"></div>
-  </div>
+  	<div>
+    	This is from route page 
+      <div>{{ name | capitalize }}</div>
+  	</div>
 </template>
 
 <script>
 export default {
-  name: 'search',
+  name: 'download',
   data() {
     return {
       name: 'helloworld vue'
@@ -30,11 +27,6 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.main {
-  width: 100%;
-  height: 100%;
-  background: #fff;
-  z-index: 1;
-}
+    
 
 </style>
