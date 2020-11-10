@@ -36,7 +36,7 @@
     </div>
   </div>
   <div class="content">
-    <div class="news" v-for="(item, index) of news_content" :key="index">
+    <div class="news" v-for="(item, index) of news_content" :key="index" @click="route_to('news_details')">
       <div class="news_normal" v-if="item.show_news_normal">
         <div class="news_top">
           <div class="news_left">
@@ -82,6 +82,7 @@
       </div>
     </div>
   </div>
+  <div class="bottom_banner_under"></div>
   <div class="bottom_banner">
     <div class="left"></div>
     <div class="middle">今日头条</div>
@@ -322,7 +323,7 @@ export default {
   text-align: center;
   line-height: 38px;
   font-size: 18px;
-  color: #000;
+  color: #f85959;
 }
 .header .bottom .option {
   display: inline-block;
@@ -335,7 +336,7 @@ export default {
   color: #000;
 }
 .content {
-  padding: 15px 16px;
+  padding: 9px 16px 0 16px;
   position: relative;
   top: 78px;
 }
@@ -463,6 +464,13 @@ export default {
       }
     }
   }
+}
+.bottom_banner_under {
+  width: 100%;
+  height: 50px;
+  background: #fff;
+  position: relative;
+  top: 78px;
 }
 .bottom_banner {
   position: fixed;

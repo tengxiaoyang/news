@@ -25,6 +25,10 @@ export default
   {
     path: '/download',
     component: r => require.ensure([], () => r(require('../page/download')), 'download')
+  }, 
+  {
+    path: '/news_details',
+    component: r => require.ensure([], () => r(require('../page/news_details')), 'news_details')
   }
 ]
 
