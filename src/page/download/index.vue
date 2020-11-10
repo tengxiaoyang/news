@@ -36,6 +36,7 @@ export default {
   .photo {
     background: url(https://s1.pstatp.com/growth/mobile_landingpage/images/bg-wap.9710384a.png);
     background-size: cover;
+    background-position: center;
     width: 100%;
     height: 100%;
     display: flex;
@@ -51,12 +52,12 @@ export default {
       line-height: 34px;
       background: #56bfff;
       color: #fff;
+      border-radius: 3px;
+      font-weight: 400;
       box-shadow: 
       0 0 0 1px #2fb0ff, 
       inset 0 2px 0 hsla(0,0%,100%,0.2), 
       0 1px 0 1px rgba(0,0,0,0.2);
-      border-radius: 3px;
-      font-weight: 400;
     }
   }
 }
