@@ -18,18 +18,22 @@
       <div class="title">
         <img src="https://sf6-ttcdn-tos.pstatp.com/obj/card-system/HeadBar/dist_browser/images/icon_hot.40711151.png">
         <div class="name">头条热榜</div>
-        <div class="update_time"></div>
+        <div class="update_time">更新时间：{{update_time}}</div>
       </div>
       <div class="content">
         <div class="content_item" v-for="(item, index) of hot_search" :key="index">
-          <div class="left" v-if="!item.show_red_mark"></div>
-          <div class="left_red" v-if="item.show_red_mark"></div>
-          <div class="middle"></div>
+          <div class="left" v-if="!item.show_red_mark">{{item.num}}</div>
+          <div class="left_red" v-if="item.show_red_mark">{{item.num}}</div>
+          <div class="middle">{{item.news}}</div>
           <div class="right">
             <div class="hot" v-if="item.show_hot"></div>
             <div class="burst" v-if="item.show_burst"></div>
           </div>
         </div>
+      </div>
+      <div class="see_more">
+        <span>查看更多</span>
+        <img src="https://sf6-ttcdn-tos.pstatp.com/obj/card-system/HeadBar/dist_browser/images/arrow-right-3x.85440730.png">
       </div>
     </div>
   </div>
@@ -40,7 +44,66 @@ export default {
   name: 'search',
   data() {
     return {
-      name: 'helloworld vue'
+      update_time: "2020/11/09 17:41",
+      hot_search: 
+      [
+        {
+          show_red_mark: true,
+          num: 1,
+          news: "31省份新增22例：本土1例在上海",
+          show_hot: true,
+          show_burst: false,
+        },
+        {
+          show_red_mark: true,
+          num: 1,
+          news: "31省份新增22例：本土1例在上海",
+          show_hot: false,
+          show_burst: true,
+        },
+        {
+          show_red_mark: true,
+          num: 1,
+          news: "31省份新增22例：本土1例在上海",
+          show_hot: false,
+          show_burst: false,
+        },
+        {
+          show_red_mark: false,
+          num: 1,
+          news: "31省份新增22例：本土1例在上海",
+          show_hot: true,
+          show_burst: false,
+        },
+        {
+          show_red_mark: false,
+          num: 1,
+          news: "31省份新增22例：本土1例在上海",
+          show_hot: true,
+          show_burst: false,
+        },
+        {
+          show_red_mark: false,
+          num: 1,
+          news: "31省份新增22例：本土1例在上海",
+          show_hot: true,
+          show_burst: false,
+        },
+        {
+          show_red_mark: false,
+          num: 1,
+          news: "31省份新增22例：本土1例在上海",
+          show_hot: true,
+          show_burst: false,
+        },
+        {
+          show_red_mark: false,
+          num: 1,
+          news: "31省份新增22例：本土1例在上海",
+          show_hot: true,
+          show_burst: false,
+        }
+      ]
     }
   },
   created(){
@@ -118,6 +181,69 @@ export default {
       .name {
         font-size: 17px;
         font-weight: 400;
+        flex: 1;
+      }
+      .update_time {
+        font-size: 12px;
+        width: 160px;
+      }
+    }
+    .content {
+      .content_item {
+        display: flex;
+        padding: 3px 0;
+        margin: 0px 14px;
+        border-bottom: 1px solid #e8e8e8;
+        .left_red {
+          color: rgb(240, 65, 66);
+          font-size: 16px;
+          font-weight: 400;
+          padding: 6px 13px 6px 0;
+        }
+        .left {
+          color: #999999;
+          font-size: 16px;
+          font-weight: 400;
+          padding: 6px 13px 6px 0;
+        }
+        .middle {
+          flex: 1;
+          color: #000;
+          font-size: 16px;
+          font-weight: 400;
+          padding: 6px 0px;
+        }
+        .right {
+          .hot {
+            background: url(https://p9-tt.byteimg.com/img/mosaic-legacy/2dd45000253c7757a4224~cs_noop.png);
+            background-size: 100%;
+            width: 16px;
+            height: 16px;
+            margin: 10px 18px;
+          }
+          .burst {
+            background: url(https://p1-tt.byteimg.com/img/mosaic-legacy/2dd45000253bfb6e6fc01~cs_noop.png);
+            background-size: 100%;
+            width: 16px;
+            height: 16px;
+            margin: 10px 18px;
+          }
+        }
+      }
+    }
+    .see_more {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 11px 0;
+      span {
+        font-size: 14px;
+        font-weight: 400;
+        text-align: center;
+      }
+      img {
+        width: 16px;
+        height: 16px;
       }
     }
   }
