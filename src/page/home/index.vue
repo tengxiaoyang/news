@@ -214,7 +214,7 @@ export default {
     get_message_window() {
       this.show_message_window = !this.show_message_window
     },
-    route_to (e) {
+    route_to(e) {
       this.$router.push({path: e})
     }
 
