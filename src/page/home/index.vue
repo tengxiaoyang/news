@@ -474,7 +474,7 @@ export default {
 }
 .bottom_banner {
   position: fixed;
-  bottom: 0;
+  bottom: -2px;
   width: 100%;
   height: 50px;
   display: flex;

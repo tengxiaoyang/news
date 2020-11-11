@@ -72,7 +72,30 @@
         </div>
       </div>
     </div>
-    <div class="top_comments"></div>
+    <div class="top_comments">
+      <div class="top">
+        <span class="title">热门评论</span>
+        <span class="see_more">打开今日头条看更多</span>
+      </div>
+      <div class="comment" v-for="(item, index) of comment_content" :key="index" @click="route_to('comment_details')">
+        <div class="writer">
+          <img class="writer_icon" :src="item.writer_icon" :alt="item.writer_icon_alt">
+          <span class="writer_name">{{item.writer_name}}</span>
+          <span class="like_num">{{item.like_num}}</span>
+          <div class="thumbs_up"></div>
+        </div>
+        <div class="content">
+          <span class="comment_text">{{item.comment_text}}</span>
+          <div class="bottom">
+            <span class="reply">
+              回复
+              <div class="arrow"></div>
+            </span>
+            <span class="update_time">{{item.update_time}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -118,6 +141,16 @@ export default {
           like_num: "14"
         },
       ],
+      comment_content: [
+        {
+          writer_icon: "https://sf6-ttcdn-tos.pstatp.com/img/pgc-image/26e6fef9e1cd4890a4edf831ba0d260c~120x256.image",
+          writer_name: "阔老总祝愿大家都幸福",
+          like_num: "268",
+          comment_text: "祝大会圆满成功！祝福祖国繁荣昌盛！为习主席点赞！",
+          update_time: "15小时前",
+        },
+      ],
+
     }
   },
   methods: {
@@ -484,6 +517,104 @@ export default {
       height: 24px;
       vertical-align: middle;
       margin: 0 0 0 37px;
+    }
+  }
+}
+.top_comments {
+  .top {
+    display: flex;
+    align-items: center;
+    margin: 40px 18px 17px 18px;
+    .title {
+      flex: 1;
+      font-size: 17px;
+      color: #222;
+      font-weight: 900;
+    }
+    .see_more {
+      font-size: 12px;
+      color: #f04142;
+      font-weight: 400;
+    }
+    .see_more::after {
+      content: "";
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAkCAMAAAAw96PuAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAzUExURUxpcfA/QO8/P/BBQe8/P/BBQvBBQe8/P/BAQfBBQfBBQfBAQe8/P/BAQe8/Qu8/QvBBQnJqC2oAAAAQdFJOUwBgEM8w76Agf9+/kECvUHA6kNbiAAAAcklEQVR42tXSRw7DMAxEUUoiVdzy73/a3GBoIM7Cs34gwWL/iI8ETMK1OCF0lbFgaeJxi7QqSQE2k/kAPRsZ9pxMTfo9UqSoDbg0WRBVEk/7bMD4aZr5COjZdU8FDvSH5F821hMgPFulBLZDMZ1y2FvzBRIPBlByP+/+AAAAAElFTkSuQmCC) no-repeat 50%;
+      background-size: contain;
+      position: relative;
+      top: 1px;
+    }
+  }
+  .comment {
+    margin: 0 18px 0;
+    .writer {
+      display: flex;
+      align-items: center;
+      .writer_icon {
+        width: 30px;
+        height: 30px;
+        border-radius: 30px;
+      }
+      .writer_name {
+        color: #222;
+        font-size: 14px;
+        font-weight: 800;
+        margin: 0 0 0 11px;
+        flex: 1;
+      }
+      .like_num {
+        color: #222;
+        font-size: 14px;
+        font-weight: 400;
+      }
+      .thumbs_up {
+        background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAMAAAC7IEhfAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAzUExURUxpcQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOV/WOUAAAAQdFJOUwDvvxAgP99ggJ/PUHCPkK/5nOnBAAAAtElEQVR42u3TwQ7CIBCE4YUuu2xtdd7/aU2xCUY0w8GDB/8Lh37JJDTIb6VzzBMQC3eKlA3GpWMTCVQKV6jIkoy5gvzgDAb8ODKDChMOG/B22meoRzuytGDaGtmKlp2fDGfxYityRO5/RKN1G66+oog4fJi6os7AfvUUyopJCJuDF8QcDJQ5mEw47MscBgqBfZnDvsxhoHDYlzncECO8ugfCn9uRdHx870pFhnSrQ77Iv293B+jXCylQ6FAKAAAAAElFTkSuQmCC) no-repeat 50%;
+        background-size: contain;
+        width: 20px;
+        height: 20px;
+        margin: 0 0 0 4px;
+      }
+    }
+    .content {
+      margin: 10px 0 7px 41px;
+      .comment_text {
+        display: block;
+        font-size: 16px;
+        color: #222;
+        font-weight: 400;
+        line-height: 28px;
+      }
+      .bottom {
+        .reply {
+          color: #222;
+          font-size: 12px;
+          font-weight: 400;
+          background: #f2f2f2;
+          display: inline-block;
+          width: 55px;
+          height: 24px;
+          line-height: 24px;
+          border-radius: 24px;
+          padding: 0 7px 0;
+          .arrow {
+            display: inline-block;
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYBAMAAAASWSDLAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAbUExURUxpcR8fHyIiIiEhIR8fHyEhISEhIR8fHyIiIhjTciMAAAAIdFJOUwAg388wkKAQTv9WEQAAADVJREFUGNNjYCATuAogcTIUkThCTUhSjBrkSRkgcxSwK0MxAFmC3QJJohjZ4AhkK90EGMgGAKJvB8cZh0MoAAAAAElFTkSuQmCC) no-repeat 50%;
+            background-size: contain;
+            width: 12px;
+            height: 12px;
+            position: relative;
+            top: 1px;
+          }
+        }
+        .update_time {
+          color: #999;
+          font-size: 12px;
+          font-weight: 400;
+          margin: 0 0 0 6px;
+        }
+      }
     }
   }
 }
