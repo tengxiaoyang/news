@@ -45,9 +45,33 @@
           <div class="news_bottom"></div>
         </div>
       </div>
-
+    </div>    
+    <div class="popular_discussion">
+      <div class="top">
+        <span class="title">热门讨论</span>
+        <span class="see_more">打开今日头条看更多</span>
+      </div>
+      <div class="discussion" v-for="(item, index) of discussion_content" :key="index" @click="route_to('discussion_details')">
+        <div class="writer">
+          <img class="left" :src="item.news_writer_icon" :alt="item.news_writer_icon_alt">
+          <img class="v_sign" :src="item.news_writer_v_sign" alt="" v-if="item.show_v_sign">
+          <div class="middle">
+            <span class="name">{{item.news_writer_name}}</span>
+            <span class="info">{{item.news_writer_info}}</span>
+          </div>
+          <div class="right">关注</div>
+        </div>
+        <div class="content">{{item.discussion_content}}</div>
+        <div class="bottom">
+          <span class="transmit"></span>
+          转发
+          <span class="comment"></span>
+          {{item.comment_num}}
+          <span class="like"></span>
+          {{item.like_num}}
+        </div>
+      </div>
     </div>
-    <div class="popular_discussion"></div>
     <div class="top_comments"></div>
   </div>
 </template>
@@ -79,6 +103,19 @@ export default {
           show_play_button: false,
           show_news_app_promotion: false,
           show_news_advertisement: false
+        },
+      ],
+      discussion_content: [
+        {
+          news_writer_icon: "https://p3.pstatp.com/thumb/46db000246c0cdd9fab8",
+          news_writer_icon_alt: "林起",
+          news_writer_v_sign: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAMAAADXqc3KAAAAS1BMVEVMaXH70UH////71En73nb73Gv611r/5Z784oj9447///v+8cL71lL95Y/72V///PH833v84oX+9M/83Gz/+uf966v96aP+9tj+77lrciyUAAAACnRSTlMA////1+r5MqqEgXHQlQAAAMFJREFUeNp1ktsSgyAQQ024KXhttfb/v7RdEbpTx/PCDFkSJtCchNZ5Y7xrQ6MJFhWrpM5AYbqy3+KP9pzHhe7wN7hgJMcCkUICMEcBsN8DMpBIjhBmxkEsQk7uq7DxdeY7CA/mjTGuOdI1HsJArrImzjjwTR7oI/kEnnwgY0Q4vTZgj2MVPIrXhEXEYuVQveZ16ovgalGJnDiougIyC8kdlSCV5LTjXgWrSkx8qxJV7csvGZ1+KKOT75/2/jPcfp8P2DQGvLjl4yEAAAAASUVORK5CYII=",
+          show_v_sign: true,
+          news_writer_name: "林起",
+          news_writer_info: "财经作家 代表作《雪球投资》",
+          discussion_content: "中国恒大：终止与深深房的重组计划，恒大重组深深房A以失败告终。这对深房伤害太大了，好比一个深闺的少女，待字闺中等大郎，这左等右等一年年过去了，从少女等到少妇，等来的是“我无法娶你”的噩耗，犹如晴天霹雳，现在少妇要走出闺房了，还有人要吗？",
+          comment_num: "16",
+          like_num: "14"
         },
       ],
     }
@@ -196,7 +233,7 @@ export default {
       margin: 0 5vw 0;
     }
   }
-  .related_suggestion {
+  .related_suggestion, .popular_discussion {
     .top {
       display: flex;
       align-items: center;
@@ -347,6 +384,106 @@ export default {
         font-size: 12px;
         height: 17px;
       }
+    }
+  }
+}
+.discussion {
+  .writer {
+    display: flex;
+    align-items: center;
+    position: relative;
+    .left {
+      width: 36px;
+      height: 36px;
+      margin: 0 0 0 21px;
+      border-radius: 50px;
+    }
+    .v_sign {
+      position: absolute;
+      width: 13px;
+      height: 13px;
+      left: 44px;
+      top: 21px;
+    }
+    .right {
+      width: 56px;
+      height: 28px;
+      border: .02rem solid #d8d8d8;
+      border-radius: .18rem;
+      font-size: 14px;
+      font-weight: 400;
+      text-align: center;
+      line-height: 28px;
+      margin: 0 20px 0 0;
+    }
+    .middle {
+      flex: 1;
+      margin: 0 0 0 9px;
+      .name {
+        display: block;
+        font-size: 14px;
+        color: #222;
+        font-weight: 400;
+      }
+      .info {
+        display: block;
+        font-size: 12px;
+        color: #bcbcbc;
+        font-weight: 400;
+      }
+    }
+  }  
+  .content {
+    font-size: 16px;
+    line-height: 25px;
+    color: #232323;
+    font-weight: 400;
+    margin: 7px 21px 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    /* autoprefixer: off */
+    -webkit-box-orient: vertical;
+  }
+  .bottom {
+    font-size: 14px;
+    color: #707070;
+    font-weight: 400;
+    margin: 0 0px 0 20px;
+    .transmit {
+      display: inline-block;
+      background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABIBAMAAACnw650AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAqUExURUxpcW9vb29vb29vb3BwcG9vb29vb3BwcHBwcHBwcHBwcG9vb29vb3BwcJK24j8AAAANdFJOUwAggEDvEDDP35u3UGiV7DUrAAAA0ElEQVRIx2NgGAWDBLBVJBBWxHXXjRhFVwgbxdhLjFESNDWK7ZASGtC8i24Ud+1dLOBKAIqiuXexAgNkNZzY1VxHMejs3VsbBTGBAIqitXcVCPqW9e4twkHCfPcOMYoujzxFbIpEKBJBSQU4FNmipIJRRQysvQWEFTEwMhChiGEEKjpLhCLW3iuEDQq/exOFn6SECTR97zqixIov9kJsA0rewa7GG9WJWIvVpgB0N17BKA5FMXxbS0zxH05MTUJdoxYQY9QEwopYJwWMNk8oAwB+DtuvfZvXYgAAAABJRU5ErkJggg==) no-repeat 50%;
+      background-size: contain;
+      background-position: 0 0;
+      width: 51px;
+      text-align: right;
+      width: 24px;
+      height: 24px;
+      vertical-align: middle;
+    }
+    .comment {
+      display: inline-block;
+      background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABIBAMAAACnw650AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAtUExURUxpcW9vb29vb29vb29vb29vb3BwcHBwcG9vb29vb3BwcG9vb29vb29vb3BwcBYAnDUAAAAOdFJOUwCAYCBAodvvMBC/kHBQ/3rbNQAAAPdJREFUeNrt0rFqwlAUxvEPolCxgym4OOUJJKA4C+6FvoCLUykExMUpZHOVDg6OPoAP4FDq2qlbt6KBxiLyPYOJXDgRr1ccXOT+tnP5c5Z7YFnX+aLODHlT6lWQ80G9HYRDvrinatxAPHIHnS4jGcpcQeeXngzFM9Gzje4s+iEPeqZorqL1+UjOODZF7+pwPfstdxWV+Q+dOtsyFJh0GpmxemgcNEOOIYLjY2tR+UPOiMonUk5ApQchz/HRoq2PvMLSTVW5iYBSwL6befKhM+cAmGSpwYSJny4awsQJ+Fokv2HUYhIyhtlDSNLDBSMyxiXO4i2CdTt7CTMhEicaP/8AAAAASUVORK5CYII=) no-repeat 50%;
+      background-size: contain;
+      background-position: 0 0;
+      width: 51px;
+      text-align: right;
+      width: 24px;
+      height: 24px;
+      vertical-align: middle;
+      margin: 0 0 0 37px;
+    }
+    .like {display: inline-block;
+      background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABICAMAAABiM0N1AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAzUExURUxpcXBwcHBwcG9vb3BwcG9vb29vb3BwcG9vb29vb29vb3BwcG9vb29vb29vb3BwcHBwcOaH+V8AAAAQdFJOUwDPrxDfIFu/gKCQ70BwMH9vr9/lAAABYUlEQVR42u2W3a6EIBCDQUH+XOX9n3bRyaa65wiu9dLeKAn5Ai3MoB49asl2brgFZHLOxvKcIa963bCge0hzYXQrbOScXhhWhcWnnuCshFi+rnw9s6BPYjblrAlQV0ByiOKyRSp6g9+Bin7AJj2zoPAZyD8TPUCRiD5s8/Nc9KLxutlhd8F8GU2XOCOiV3K0Exc99tldjt7th8lspBtls7ciRC/S+a+MPaTMJm8UVA1UKSx2h9nfUeu+lY8PlnAgVZEUFnNob4pepAGqnbPD2mObs6DuaIpD3nUQ/Nd3gHrkyoFGXEUO9JJWx4DgdU+D4DUPQjngQBO85kADvOZAEV5zIIcry4GSzCZA8NqTILwpOBC8nkgQ2hwHgtccCP0ykiA8KUgQnhQ0CIWfB2mZS4DgdaiB9EnQDK+JBikc09df52HTsv3/CikX+aqD5xUa7+qzio0u7E+hTBzVo0ePftAbflAqQpNfW3YAAAAASUVORK5CYII=) no-repeat 50%;
+      background-size: contain;
+      background-position: 0 0;
+      width: 51px;
+      text-align: right;
+      width: 24px;
+      height: 24px;
+      vertical-align: middle;
+      margin: 0 0 0 37px;
     }
   }
 }
