@@ -16,18 +16,7 @@
     </div>
     <div class="bottom">
       <div class="option_outside">
-        <a class="recommended_option" @click="get_news(0)">推荐</a>
-        <!-- <a class="option">视频</a> -->
-        <a class="option" @click="get_news(1)">热点</a>
-        <a class="option">社会</a>
-        <a class="option">娱乐</a>
-        <a class="option">军事</a>
-        <a class="option">科技</a>
-        <a class="option">汽车</a>
-        <a class="option">房产</a>
-        <a class="option">家居</a>
-        <a class="option">体育</a>
-        <a class="option">财经</a>
+        <a class="option" v-for="(item, index) of news_option" :key="index" :style="item.news_option_style" @click="get_news(index)">{{item.option_name}}</a>
       </div>
       <a class="plus_sign"  @click="route_to('more')">
         <div class="horizontal_line"></div>
@@ -113,95 +102,71 @@
 
 <script>
 import HttpClient from '../../config/ajax.js';
-
+let now_type = 0;
 export default {
   name: 'home',
   data() {
     return {
       show_message_window: false,
-      now_type: 0,
-      news_content: [
-        // {
-        //   show_news_normal: true,
-        //   news_title: "习近平对川藏铁路开工建设作出重要指示强调 发扬“两路”精神和青藏铁路精神 高质量推进工程建设 李克强作出批示",
-        //   show_sticky_content: true,
-        //   sticky_content: "置顶",
-        //   writer: "新华网客户端",
-        //   number_of_comments: "1378",
-        //   show_release_time: true,
-        //   release_time: "2",
-        //   photo: "",
-        //   show_play_button: false,
-        //   show_news_app_promotion: false,
-        //   show_news_advertisement: false
-        // },
-        // {
-        //   show_news_normal: true,
-        //   news_title: "焦点访谈：“十四五”时期，中国将着重办好哪些事？",
-        //   show_sticky_content: true,
-        //   sticky_content: "置顶",
-        //   writer: "央视网新闻",
-        //   number_of_comments: "608",
-        //   show_release_time: true,
-        //   release_time: "2",
-        //   photo: "",
-        //   show_play_button: false,
-        //   show_news_app_promotion: false,
-        //   show_news_advertisement: false
-        // },
-        // {
-        //   show_news_normal: true,
-        //   news_title: "7首歌，一起走过71年",
-        //   show_sticky_content: false,
-        //   sticky_content: "置顶",
-        //   writer: "人民网",
-        //   number_of_comments: "400",
-        //   show_release_time: false,
-        //   release_time: "2",
-        //   photo: "http://p1-tt-ipv6.byteimg.com/img/tos-cn-i-0004/14a069d7bc264501b7c8ff2157b6633a~tplv-tt-cs0:640:360.jpg",
-        //   show_play_button: true,
-        //   show_news_app_promotion: false,
-        //   show_news_advertisement: false
-        // },
-        // {
-        //   show_news_normal: false,
-        //   news_title: "7首歌，一起走过71年",
-        //   show_sticky_content: false,
-        //   sticky_content: "置顶",
-        //   writer: "人民网",
-        //   number_of_comments: "400",
-        //   show_release_time: false,
-        //   release_time: "2",
-        //   photo: "http://p1-tt-ipv6.byteimg.com/img/tos-cn-i-0004/14a069d7bc264501b7c8ff2157b6633a~tplv-tt-cs0:640:360.jpg",
-        //   show_play_button: true,
-        //   show_news_app_promotion: true,
-        //   promotion_photo: "http://s2.pstatp.com/site/promotion/landing_page/img/午夜_6584dfd45e8f505ae91d52209df7065c.jpg",
-        //   promotion_letter: "APP",
-        //   promotion_name: "今日头条",
-        //   show_news_advertisement: false
-        // },        
-        // {
-        //   show_news_normal: false,
-        //   news_title: "7首歌，一起走过71年",
-        //   show_sticky_content: false,
-        //   sticky_content: "置顶",
-        //   writer: "人民网",
-        //   number_of_comments: "400",
-        //   show_release_time: false,
-        //   release_time: "2",
-        //   photo: "http://p1-tt-ipv6.byteimg.com/img/tos-cn-i-0004/14a069d7bc264501b7c8ff2157b6633a~tplv-tt-cs0:640:360.jpg",
-        //   show_play_button: true,
-        //   show_news_app_promotion: false,
-        //   show_news_advertisement: true,
-        //   ad_title: "长安UNI-T，限时十重礼，等你来享！",
-        //   ad_photo: "http://sf3-ttcdn-tos.pstatp.com/img/web.business.image/202011065d0d0a679d2bc2104ee5ae35~640x0.image?from=ad",
-        //   ad_text: "广告",
-        //   ad_product: "懂车帝优选",
-        //   ad_number_of_comments: "0",
-        //   ad_release_time: "7"
-        // },
-        
-      ]
+      news_option: [
+        {
+          id: 1,
+          news_option_style: "color: #000;",
+          option_name: "推荐",
+        },
+        {
+          id: 2,
+          news_option_style: "color: #000;",
+          option_name: "热点"
+        },
+        {
+          id: 3,
+          news_option_style: "color: #000;",
+          option_name: "社会"
+        },
+        {
+          id: 4,
+          news_option_style: "color: #000;",
+          option_name: "娱乐"
+        },
+        {
+          id: 5,
+          news_option_style: "color: #000;",
+          option_name: "军事"
+        },
+        {
+          id: 6,
+          news_option_style: "color: #000;",
+          option_name: "科技"
+        },
+        {
+          id: 7,
+          news_option_style: "color: #000;",
+          option_name: "汽车"
+        },
+        {
+          id: 8,
+          news_option_style: "color: #000;",
+          option_name: "房产"
+        },
+        {
+          id: 9,
+          news_option_style: "color: #000;",
+          option_name: "家居"
+        },
+        {
+          id: 10,
+          news_option_style: "color: #000;",
+          option_name: "体育"
+        },
+        {
+          id: 11,
+          news_option_style: "color: #000;",
+          option_name: "财经"
+        },
+      ],
+      news_content: [],
+
 
     }
   },
@@ -214,14 +179,8 @@ export default {
   
   },
   mounted() {
-    console.log(this.now_type),
-    HttpClient.getList({  
-      params: { type:  this.now_type },  
-      callback: (res) => {
-        console.log(res.data.data), 
-        this.news_content = res.data.data
-      } 
-    });  
+    console.log(now_type),
+    this.get_news(now_type)
   },
   methods: {
     // addNum() {
@@ -242,11 +201,20 @@ export default {
         callback: (res) => {
           console.log(res.data.data), 
           this.news_content = res.data.data,
-          this.now_type = e
-          console.log(this.now_type)
+          now_type = e
+          console.log(now_type)
+          
+          for (let i = 0; i < this.news_option.length; ++ i) {
+            if (i === e) {
+              this.news_option[i].news_option_style = "color: #F85959;"
+            } else {
+              this.news_option[i].news_option_style = "color: #000000;"
+            }
+            console.log(this.news_option[e].news_option_style)
+          }
         } 
       });
-
+      
     },
 
   }
