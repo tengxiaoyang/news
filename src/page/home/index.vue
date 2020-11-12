@@ -16,9 +16,9 @@
     </div>
     <div class="bottom">
       <div class="option_outside">
-        <a class="recommended_option">推荐</a>
-        <a class="option">视频</a>
-        <a class="option">热点</a>
+        <a class="recommended_option" @click="get_news(0)">推荐</a>
+        <!-- <a class="option">视频</a> -->
+        <a class="option" @click="get_news(1)">热点</a>
         <a class="option">社会</a>
         <a class="option">娱乐</a>
         <a class="option">军事</a>
@@ -37,20 +37,21 @@
   </div>
   <div class="content">
     <div class="news" v-for="(item, index) of news_content" :key="index" @click="route_to('news_details')">
-      <div class="news_normal" v-if="item.show_news_normal">
+      <!-- <div class="news_normal" v-if="item.show_news_normal"> -->
+      <div class="news_normal">
         <div class="news_top">
           <div class="news_left">
-            <div class="news_title">{{item.news_title}}</div>
+            <div class="news_title">{{item.name}}</div>
             <div class="news_information">
               <span class="news-sticky_content" v-if="item.show_sticky_content">{{item.sticky_content}}</span>
-              <div class="news-writer">{{item.writer}}</div>
-              <div class="news-number_of_comments">评论 {{item.number_of_comments}}</div>
+              <div class="news-writer">{{item.author}}</div>
+              <div class="news-number_of_comments">评论 {{item.comment}}</div>
               <div class="news-release_time" v-if="item.show_release_time">{{item.release_time}}小时前</div>
             </div>
           </div>
           <div class="news_right">
             <div class="news-photo_outside">
-              <img class="news-photo" v-bind:src="item.photo">
+              <img class="news-photo" v-bind:src="item.img1">
               <div class="play_button" v-if="item.show_play_button"></div>
             </div>
           </div>
@@ -111,113 +112,142 @@
 </template>
 
 <script>
+import HttpClient from '../../config/ajax.js';
+
 export default {
   name: 'home',
   data() {
     return {
       show_message_window: false,
+      now_type: 0,
       news_content: [
-        {
-          show_news_normal: true,
-          news_title: "习近平对川藏铁路开工建设作出重要指示强调 发扬“两路”精神和青藏铁路精神 高质量推进工程建设 李克强作出批示",
-          show_sticky_content: true,
-          sticky_content: "置顶",
-          writer: "新华网客户端",
-          number_of_comments: "1378",
-          show_release_time: true,
-          release_time: "2",
-          photo: "",
-          show_play_button: false,
-          show_news_app_promotion: false,
-          show_news_advertisement: false
-        },
-        {
-          show_news_normal: true,
-          news_title: "焦点访谈：“十四五”时期，中国将着重办好哪些事？",
-          show_sticky_content: true,
-          sticky_content: "置顶",
-          writer: "央视网新闻",
-          number_of_comments: "608",
-          show_release_time: true,
-          release_time: "2",
-          photo: "",
-          show_play_button: false,
-          show_news_app_promotion: false,
-          show_news_advertisement: false
-        },
-        {
-          show_news_normal: true,
-          news_title: "7首歌，一起走过71年",
-          show_sticky_content: false,
-          sticky_content: "置顶",
-          writer: "人民网",
-          number_of_comments: "400",
-          show_release_time: false,
-          release_time: "2",
-          photo: "http://p1-tt-ipv6.byteimg.com/img/tos-cn-i-0004/14a069d7bc264501b7c8ff2157b6633a~tplv-tt-cs0:640:360.jpg",
-          show_play_button: true,
-          show_news_app_promotion: false,
-          show_news_advertisement: false
-        },
-        {
-          show_news_normal: false,
-          news_title: "7首歌，一起走过71年",
-          show_sticky_content: false,
-          sticky_content: "置顶",
-          writer: "人民网",
-          number_of_comments: "400",
-          show_release_time: false,
-          release_time: "2",
-          photo: "http://p1-tt-ipv6.byteimg.com/img/tos-cn-i-0004/14a069d7bc264501b7c8ff2157b6633a~tplv-tt-cs0:640:360.jpg",
-          show_play_button: true,
-          show_news_app_promotion: true,
-          promotion_photo: "http://s2.pstatp.com/site/promotion/landing_page/img/午夜_6584dfd45e8f505ae91d52209df7065c.jpg",
-          promotion_letter: "APP",
-          promotion_name: "今日头条",
-          show_news_advertisement: false
-        },        
-        {
-          show_news_normal: false,
-          news_title: "7首歌，一起走过71年",
-          show_sticky_content: false,
-          sticky_content: "置顶",
-          writer: "人民网",
-          number_of_comments: "400",
-          show_release_time: false,
-          release_time: "2",
-          photo: "http://p1-tt-ipv6.byteimg.com/img/tos-cn-i-0004/14a069d7bc264501b7c8ff2157b6633a~tplv-tt-cs0:640:360.jpg",
-          show_play_button: true,
-          show_news_app_promotion: false,
-          show_news_advertisement: true,
-          ad_title: "长安UNI-T，限时十重礼，等你来享！",
-          ad_photo: "http://sf3-ttcdn-tos.pstatp.com/img/web.business.image/202011065d0d0a679d2bc2104ee5ae35~640x0.image?from=ad",
-          ad_text: "广告",
-          ad_product: "懂车帝优选",
-          ad_number_of_comments: "0",
-          ad_release_time: "7"
-        },
+        // {
+        //   show_news_normal: true,
+        //   news_title: "习近平对川藏铁路开工建设作出重要指示强调 发扬“两路”精神和青藏铁路精神 高质量推进工程建设 李克强作出批示",
+        //   show_sticky_content: true,
+        //   sticky_content: "置顶",
+        //   writer: "新华网客户端",
+        //   number_of_comments: "1378",
+        //   show_release_time: true,
+        //   release_time: "2",
+        //   photo: "",
+        //   show_play_button: false,
+        //   show_news_app_promotion: false,
+        //   show_news_advertisement: false
+        // },
+        // {
+        //   show_news_normal: true,
+        //   news_title: "焦点访谈：“十四五”时期，中国将着重办好哪些事？",
+        //   show_sticky_content: true,
+        //   sticky_content: "置顶",
+        //   writer: "央视网新闻",
+        //   number_of_comments: "608",
+        //   show_release_time: true,
+        //   release_time: "2",
+        //   photo: "",
+        //   show_play_button: false,
+        //   show_news_app_promotion: false,
+        //   show_news_advertisement: false
+        // },
+        // {
+        //   show_news_normal: true,
+        //   news_title: "7首歌，一起走过71年",
+        //   show_sticky_content: false,
+        //   sticky_content: "置顶",
+        //   writer: "人民网",
+        //   number_of_comments: "400",
+        //   show_release_time: false,
+        //   release_time: "2",
+        //   photo: "http://p1-tt-ipv6.byteimg.com/img/tos-cn-i-0004/14a069d7bc264501b7c8ff2157b6633a~tplv-tt-cs0:640:360.jpg",
+        //   show_play_button: true,
+        //   show_news_app_promotion: false,
+        //   show_news_advertisement: false
+        // },
+        // {
+        //   show_news_normal: false,
+        //   news_title: "7首歌，一起走过71年",
+        //   show_sticky_content: false,
+        //   sticky_content: "置顶",
+        //   writer: "人民网",
+        //   number_of_comments: "400",
+        //   show_release_time: false,
+        //   release_time: "2",
+        //   photo: "http://p1-tt-ipv6.byteimg.com/img/tos-cn-i-0004/14a069d7bc264501b7c8ff2157b6633a~tplv-tt-cs0:640:360.jpg",
+        //   show_play_button: true,
+        //   show_news_app_promotion: true,
+        //   promotion_photo: "http://s2.pstatp.com/site/promotion/landing_page/img/午夜_6584dfd45e8f505ae91d52209df7065c.jpg",
+        //   promotion_letter: "APP",
+        //   promotion_name: "今日头条",
+        //   show_news_advertisement: false
+        // },        
+        // {
+        //   show_news_normal: false,
+        //   news_title: "7首歌，一起走过71年",
+        //   show_sticky_content: false,
+        //   sticky_content: "置顶",
+        //   writer: "人民网",
+        //   number_of_comments: "400",
+        //   show_release_time: false,
+        //   release_time: "2",
+        //   photo: "http://p1-tt-ipv6.byteimg.com/img/tos-cn-i-0004/14a069d7bc264501b7c8ff2157b6633a~tplv-tt-cs0:640:360.jpg",
+        //   show_play_button: true,
+        //   show_news_app_promotion: false,
+        //   show_news_advertisement: true,
+        //   ad_title: "长安UNI-T，限时十重礼，等你来享！",
+        //   ad_photo: "http://sf3-ttcdn-tos.pstatp.com/img/web.business.image/202011065d0d0a679d2bc2104ee5ae35~640x0.image?from=ad",
+        //   ad_text: "广告",
+        //   ad_product: "懂车帝优选",
+        //   ad_number_of_comments: "0",
+        //   ad_release_time: "7"
+        // },
         
       ]
 
     }
   },
   computed: {
-    num() {
-      return this.$store.state.num;
-    }
+    // num() {
+    //   return this.$store.state.num;
+    // }
+  },
+  created() {
+  
+  },
+  mounted() {
+    console.log(this.now_type),
+    HttpClient.getList({  
+      params: { type:  this.now_type },  
+      callback: (res) => {
+        console.log(res.data.data), 
+        this.news_content = res.data.data
+      } 
+    });  
   },
   methods: {
-    addNum() {
-      let r = Math.floor(Math.random() * 10);
-      console.log(r);
-      this.$store.commit('ADD_NUM', r)
-    },
+    // addNum() {
+    //   let r = Math.floor(Math.random() * 10);
+    //   console.log(r);
+    //   this.$store.commit('ADD_NUM', r)
+    // },
     get_message_window() {
       this.show_message_window = !this.show_message_window
     },
     route_to(e) {
       this.$router.push({path: e})
-    }
+    },
+    get_news(e) {
+      console.log(e)
+      HttpClient.getList({  
+        params: { type:  e },  
+        callback: (res) => {
+          console.log(res.data.data), 
+          this.news_content = res.data.data,
+          this.now_type = e
+          console.log(this.now_type)
+        } 
+      });
+
+    },
 
   }
 }

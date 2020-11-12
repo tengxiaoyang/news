@@ -1,8 +1,8 @@
 import axios from 'axios'
 
-const apiBaseUrl = 'https://blog.shuipingguo.com'
+const apiBaseUrl = 'https://www.shuipingguo.com/news/'
 const urlMap = {
-  getList: apiBaseUrl + '/list1'
+  getList: apiBaseUrl + ''
 }
 
 const HttpClient = {
