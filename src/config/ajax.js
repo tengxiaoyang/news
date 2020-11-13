@@ -9,9 +9,13 @@ const HttpClient = {
   getList: (options) => {
     axios
       .get(urlMap.getList, {params: options.params})
-        .then(function (response) { options.callback && options.callback(response); })
-        .catch(function (error) { options.failcallback && options.failcallback(error); })
-        .then(function () { }) 
+      .then(function (response) { 
+        options.callback && options.callback(response); 
+      })
+      .catch(function (error) { 
+        options.failcallback && options.failcallback(error); 
+      })
+      .then(function () { }) 
   }
 }
 

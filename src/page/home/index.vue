@@ -16,7 +16,12 @@
     </div>
     <div class="bottom">
       <div class="option_outside">
-        <a class="option" v-for="(item, index) of news_option" :key="index" :style="item.news_option_style" @click="get_news(index)">{{item.option_name}}</a>
+        <a class="option" 
+          :class="{ active_option: item.type === selected_type }"
+          v-for="(item, index) of news_option" 
+          :key="index" 
+          @click="get_news(item.type)"
+        >{{item.option_name}}</a>
       </div>
       <a class="plus_sign"  @click="route_to('more')">
         <div class="horizontal_line"></div>
@@ -102,66 +107,55 @@
 
 <script>
 import HttpClient from '../../config/ajax.js';
-let now_type = 0;
 export default {
   name: 'home',
   data() {
     return {
+      selected_type: 0,
       show_message_window: false,
       news_option: [
         {
-          id: 1,
-          news_option_style: "color: #000;",
+          type: 0,
           option_name: "推荐",
         },
         {
-          id: 2,
-          news_option_style: "color: #000;",
+          type: 1,
           option_name: "热点"
         },
         {
-          id: 3,
-          news_option_style: "color: #000;",
+          type: 2,
           option_name: "社会"
         },
         {
-          id: 4,
-          news_option_style: "color: #000;",
+          type: 3,
           option_name: "娱乐"
         },
         {
-          id: 5,
-          news_option_style: "color: #000;",
+          type: 4,
           option_name: "军事"
         },
         {
-          id: 6,
-          news_option_style: "color: #000;",
+          type: 5,
           option_name: "科技"
         },
         {
-          id: 7,
-          news_option_style: "color: #000;",
+          type: 6,
           option_name: "汽车"
         },
         {
-          id: 8,
-          news_option_style: "color: #000;",
+          type: 7,
           option_name: "房产"
         },
         {
-          id: 9,
-          news_option_style: "color: #000;",
+          type: 8,
           option_name: "家居"
         },
         {
-          id: 10,
-          news_option_style: "color: #000;",
+          type: 9,
           option_name: "体育"
         },
         {
-          id: 11,
-          news_option_style: "color: #000;",
+          type: 10,
           option_name: "财经"
         },
       ],
@@ -179,8 +173,7 @@ export default {
   
   },
   mounted() {
-    console.log(now_type),
-    this.get_news(now_type)
+    this.get_news(this.selected_type)
   },
   methods: {
     // addNum() {
@@ -201,22 +194,10 @@ export default {
         callback: (res) => {
           console.log(res.data.data), 
           this.news_content = res.data.data,
-          now_type = e
-          console.log(now_type)
-          
-          for (let i = 0; i < this.news_option.length; ++ i) {
-            if (i === e) {
-              this.news_option[i].news_option_style = "color: #F85959;"
-            } else {
-              this.news_option[i].news_option_style = "color: #000000;"
-            }
-            console.log(this.news_option[e].news_option_style)
-          }
+          this.selected_type = e
         } 
       });
-      
     },
-
   }
 }
 </script>
@@ -313,7 +294,7 @@ export default {
   white-space: nowrap;
   position: relative;
 }
-.header .bottom .recommended_option {
+.header .bottom .active_option {
   display: inline-block;
   width: 64px;
   height: 38px;
@@ -323,7 +304,7 @@ export default {
   font-size: 18px;
   color: #f85959;
 }
-.header .bottom .option {
+.header .bottom a {
   display: inline-block;
   width: 64px;
   height: 38px;
