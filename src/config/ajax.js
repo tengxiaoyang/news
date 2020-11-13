@@ -17,6 +17,7 @@ const HttpClient = {
         options.failcallback && options.failcallback(error); 
       })
       .then(function () { }) 
+    console.log("执行完axios")
   }
 }
 

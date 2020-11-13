@@ -11,7 +11,7 @@
           v-for="(item, index) of option_top" 
           :key="index" 
           v-bind:style="item.option_name_style"
-          @click="move_to_bottom(item.id)"
+          @click="move_to_bottom(item.type)"
         >{{item.option_name}}</div>
       </div>
     </div>
@@ -21,7 +21,7 @@
         <div class="option" 
           v-for="(item, index) of option_bottom" 
           :key="index"
-          @click="move_to_top(item.id)"
+          @click="move_to_top(item.type)"
         >{{item.option_name}}</div>
       </div>
     </div>
@@ -35,86 +35,86 @@ export default {
     return {
       option_top: [
         { 
-          id: 0,
+          type: 0,
           option_name: "推荐",
           option_name_style: "background: #f0f0f0;"
         },
         {
-          id: 1,
+          type: 1,
           option_name: "热点"
         },
         {
-          id: 2,
+          type: 2,
           option_name: "社会"
         },
         {
-          id: 3,
+          type: 3,
           option_name: "娱乐"
         },
         {
-          id: 4,
+          type: 4,
           option_name: "科技"
         },
         {
-          id: 5,
+          type: 5,
           option_name: "汽车"
         },
         {
-          id: 6,
+          type: 6,
           option_name: "体育"
         },
         {
-          id: 7,
+          type: 7,
           option_name: "财经"
         },
         {
-          id: 8,
+          type: 8,
           option_name: "军事"
         },
         {
-          id: 9,
+          type: 9,
           option_name: "国际"
         },
         {
-          id: 10,
+          type: 10,
           option_name: "时尚"
         },
         {
-          id: 11,
+          type: 11,
           option_name: "游戏"
         },
       ],
       option_bottom: [
         {
-          id: 12,
+          type: 12,
           option_name: "旅游"
         },
         {
-          id: 13,
+          type: 13,
           option_name: "历史"
         },
         {
-          id: 14,
+          type: 14,
           option_name: "探索"
         },
         {
-          id: 15,
+          type: 15,
           option_name: "美食"
         },
         {
-          id: 16,
+          type: 16,
           option_name: "育儿"
         },
         {
-          id: 17,
+          type: 17,
           option_name: "养生"
         },
         {
-          id: 18,
+          type: 18,
           option_name: "故事"
         },
         {
-          id: 19,
+          type: 19,
           option_name: "美文"
         },
       ]
@@ -129,7 +129,7 @@ export default {
       if (e !== 0) {
         console.log(e)
         for (let i = 0; i < this.option_top.length; ++ i) {
-          if (this.option_top[i].id === e) {
+          if (this.option_top[i].type === e) {
             this.option_bottom.push(this.option_top[i]);
             this.option_top.splice(i, 1);
             console.log(i)
@@ -142,7 +142,7 @@ export default {
       if (e !== 0) {
         console.log(e)
         for (let i = 0; i < this.option_bottom.length; ++ i) {
-          if (this.option_bottom[i].id === e) {
+          if (this.option_bottom[i].type === e) {
             this.option_top.push(this.option_bottom[i]);
             this.option_bottom.splice(i, 1);
             console.log(i)

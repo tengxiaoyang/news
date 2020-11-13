@@ -188,15 +188,17 @@ export default {
       this.$router.push({path: e})
     },
     get_news(e) {
-      console.log(e)
+      console.log("执行get_news")
       HttpClient.getList({  
         params: { type:  e },  
         callback: (res) => {
-          console.log(res.data.data), 
-          this.news_content = res.data.data,
-          this.selected_type = e
+          console.log("执行callback");
+          this.news_content = res.data.data;
+          this.selected_type = e;
+          console.log("执行完callback");
         } 
       });
+      console.log("执行完get_news")
     },
   }
 }
