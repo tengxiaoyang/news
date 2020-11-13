@@ -7,6 +7,7 @@ const urlMap = {
 
 const HttpClient = {
   getList: (options) => {
+    console.log("执行axios")
     axios
       .get(urlMap.getList, {params: options.params})
       .then(function (response) { 
