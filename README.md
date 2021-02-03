@@ -6,7 +6,7 @@
 npm install 或 yarn(推荐)
 
 # 开启本地服务器localhost:8088
-npm run dev
+npm run serve
 
 # 发布环境
 npm run build
